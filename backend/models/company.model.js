@@ -8,6 +8,9 @@ const companySchema=new mongoose.Schema({
     description:{
         type:String
     },
+    website:{
+        type:String
+    },
     location:{
         type:String
     },
