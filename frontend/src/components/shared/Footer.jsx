@@ -5,9 +5,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-gray-200 py-8">
       <div className="max-w-7xl mx-auto px-4">
-        
         <div className="flex flex-col md:flex-row justify-between items-center">
-          
           {/* Left Section */}
           <div className="mb-4 md:mb-0">
             <h2 className="text-xl font-bold">Job Hunt</h2>
@@ -18,7 +16,6 @@ const Footer = () => {
 
           {/* Right Section - Social Icons */}
           <div className="flex space-x-5 mt-4 md:mt-0">
-            
             <a href="https://facebook.com" target="_blank" rel="noreferrer">
               <FaFacebook className="w-6 h-6 cursor-pointer hover:text-blue-600 transition duration-200" />
             </a>
@@ -30,10 +27,8 @@ const Footer = () => {
             <a href="https://linkedin.com" target="_blank" rel="noreferrer">
               <FaLinkedin className="w-6 h-6 cursor-pointer hover:text-blue-700 transition duration-200" />
             </a>
-
           </div>
         </div>
-
       </div>
     </footer>
   );

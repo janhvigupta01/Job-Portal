@@ -1,4 +1,6 @@
 import {Company} from "../models/company.model.js";
+import { Job } from "../models/job.model.js";
+import { Application } from "../models/application.model.js";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 export const registerCompany=async(req,res)=>{
@@ -97,3 +99,40 @@ export const updateCompany=async (req,res)=>{
         console.log(error);
     }
 }
+export const getApplicants = async (req, res) => {
+    try {
+        const companyId = req.params.id;
+
+        // Find all jobs associated with the company
+        const jobs = await Job.find({ company: companyId });
+
+        if (!jobs || jobs.length === 0) {
+            return res.status(200).json({
+                message: "No jobs found for this company.",
+                applicants: [],
+                success: true,
+            });
+        }
+
+        // Get all job IDs
+        const jobIds = jobs.map(job => job._id);
+
+        // Find all applications for these jobs and populate applicant details
+        const applicants = await Application.find({ job: { $in: jobIds } }).populate({
+            path: 'applicant',
+        }).populate({
+            path: 'job',
+        });
+
+        return res.status(200).json({
+            applicants,
+            success: true,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "Server error",
+            success: false,
+        });
+    }
+};

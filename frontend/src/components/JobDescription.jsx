@@ -19,7 +19,7 @@ const JobDescription = () => {
         application?.applicant?._id === user?._id ||
         application?.applicant === user?._id,
     ) || false;
-    const [isApplied, setIsApplied] = useState(isInitiallyApplied);
+  const [isApplied, setIsApplied] = useState(isInitiallyApplied);
   const params = useParams();
   const jobId = params.id;
   const dispatch = useDispatch();
@@ -35,10 +35,12 @@ const JobDescription = () => {
       );
       if (res.data.success) {
         setIsApplied(true); // update the local state
-        const updateSingleJob = {...singleJob, applications:[...singleJob?.applications, { applicant: user?._id }]};
+        const updateSingleJob = {
+          ...singleJob,
+          applications: [...singleJob?.applications, { applicant: user?._id }],
+        };
         dispatch(setSingleJob(updateSingleJob)); // help us to real time UI update
         toast.success(res.data.message);
-      
       }
     } catch (error) {
       console.log(error);
@@ -53,7 +55,11 @@ const JobDescription = () => {
         });
         if (res.data.success) {
           dispatch(setSingleJob(res.data.job));
-          setIsApplied(res.data.job.application.some(application=>application.applicant===user?._id)); // ensure the state is in sync with fetched data
+          setIsApplied(
+            res.data.job.application.some(
+              (application) => application.applicant === user?._id,
+            ),
+          ); // ensure the state is in sync with fetched data
         }
       } catch (error) {
         console.log(error);
