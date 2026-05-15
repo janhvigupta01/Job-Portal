@@ -11,11 +11,11 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const searchJobHandler = () => {
     dispatch(setSearchedQuery(query));
-    navigate("/browse");
+    navigate("/jobs");
   };
   return (
     <div className="text-center">
-      <div className="flex flex-col gap-5 my-10">
+      <div className="flex flex-col gap-4 my-6">
         <span className=" mx-auto px-4 py-2 rounded-full bg-gray-100 text-[#F83002] font-medium ">
           No. 1 Job Hunt Website
         </span>

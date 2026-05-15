@@ -21,40 +21,45 @@ const Profile = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-4xl mx-auto border border-gray-200 rounded-2xl my-5 p-8">
-        <div className="flex justify-between">
+      <div className="max-w-4xl mx-auto border border-gray-200 rounded-2xl my-5 p-4 md:p-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
           <div className="flex items-center gap-4">
-            <Avatar className="h-24 w-24">
+            <Avatar className="h-16 w-16 sm:h-24 sm:w-24">
               <AvatarImage src={user?.profile?.profilePhoto} alt="profile" />
             </Avatar>
             <div>
-              <h1 className="font-medium text-xl">
+              <h1 className="font-medium text-lg sm:text-xl">
                 {user?.fullname || "Full Name"}
               </h1>
-              <p>{user?.profile?.bio || "No bio added yet."}</p>
+              <p className="text-sm sm:text-base text-gray-600">
+                {user?.profile?.bio || "No bio added yet."}
+              </p>
             </div>
           </div>
           <Button
             onClick={() => setOpen(true)}
-            className="text-right"
+            className="mt-4 sm:mt-0"
             variant="outline"
           >
-            <Pen />
+            <Pen className="w-4 h-4 mr-2" />
+            Update
           </Button>
         </div>
         <div className="my-5">
           <div className="flex items-center gap-3 my-2">
-            <Mail />
-            <span>{user?.email || "NA"}</span>
+            <Mail className="w-5 h-5" />
+            <span className="text-sm sm:text-base">{user?.email || "NA"}</span>
           </div>
           <div className="flex items-center gap-3 my-2">
-            <Contact />
-            <span>{user?.phoneNumber || "NA"}</span>
+            <Contact className="w-5 h-5" />
+            <span className="text-sm sm:text-base">
+              {user?.phoneNumber || "NA"}
+            </span>
           </div>
         </div>
         <div className="my-5">
-          <h1>Skills</h1>
-          <div className="flex items-center gap-1">
+          <h1 className="font-bold text-lg">Skills</h1>
+          <div className="flex flex-wrap items-center gap-2 mt-2">
             {skills.length !== 0 ? (
               skills.map((item, index) => (
                 <Badge key={`${item}-${index}`}>{item}</Badge>
@@ -71,7 +76,7 @@ const Profile = () => {
               target="_blank"
               rel="noopener noreferrer"
               href={user?.profile?.resume}
-              className="text-blue-500 w-full hover:underline cursor-pointer"
+              className="text-blue-500 w-full hover:underline cursor-pointer truncate"
             >
               {user?.profile?.resumeOriginalName || "Resume"}
             </a>
@@ -80,7 +85,7 @@ const Profile = () => {
           )}
         </div>
       </div>
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl">
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl p-4 md:p-0">
         <h1 className="font-bold text-lg my-5">Applied Jobs</h1>
         {/*Applied job Table*/}
         <AppliedJobTable />

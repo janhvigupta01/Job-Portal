@@ -26,14 +26,17 @@ const CategoryCarousel = () => {
   };
   return (
     <div>
-      <Carousel className="w-full max-w-xl mx-auto my-20">
+      <Carousel className="w-full max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto my-20">
         <CarouselContent>
           {category.map((cat, index) => (
-            <CarouselItem className="md:basis-1/2 lg-basis-1/3">
+            <CarouselItem
+              key={index}
+              className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
+            >
               <Button
                 onClick={() => searchJobHandler(cat)}
                 variant="outline"
-                className="rounded-full"
+                className="rounded-full w-full"
               >
                 {cat}
               </Button>

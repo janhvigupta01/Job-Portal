@@ -75,14 +75,14 @@ const PostJob = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex items-center justify-center w-screen my-5">
+      <div className="flex items-center justify-center w-full my-5 px-4 sm:px-6 lg:px-8">
         <form
           onSubmit={submitHandler}
-          className="p-8 max-w-4xl border border-gray-200 shadow-lg rounded-md"
+          className="p-8 w-full max-w-4xl border border-gray-200 shadow-lg rounded-md"
         >
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="">Title</label>
+              <label>Title</label>
               <Input
                 type="text"
                 name="title"
@@ -93,7 +93,7 @@ const PostJob = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Description</label>
+              <label>Description</label>
               <Input
                 type="text"
                 name="description"
@@ -104,7 +104,7 @@ const PostJob = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Requirements</label>
+              <label>Requirements</label>
               <Input
                 type="text"
                 name="requirements"
@@ -115,29 +115,29 @@ const PostJob = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Salary</label>
+              <label>Salary</label>
               <Input
                 type="text"
                 name="salary"
                 value={input.salary}
                 onChange={changeEventHandler}
                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                placeholder="Enter job salary"
+                placeholder="Enter salary"
               />
             </div>
             <div>
-              <label htmlFor="">Location</label>
+              <label>Location</label>
               <Input
                 type="text"
                 name="location"
                 value={input.location}
                 onChange={changeEventHandler}
                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                placeholder="Enter job location"
+                placeholder="Enter location"
               />
             </div>
             <div>
-              <label htmlFor="">Job Type</label>
+              <label>Job Type</label>
               <Input
                 type="text"
                 name="jobType"
@@ -148,7 +148,7 @@ const PostJob = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Experience Level</label>
+              <label>Experience</label>
               <Input
                 type="text"
                 name="experience"
@@ -159,54 +159,48 @@ const PostJob = () => {
               />
             </div>
             <div>
-              <label htmlFor="">No of Position</label>
+              <label>No of Position</label>
               <Input
                 type="number"
                 name="position"
                 value={input.position}
                 onChange={changeEventHandler}
                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                placeholder="Enter position"
+                placeholder="Enter no of position"
               />
             </div>
-            {companies.length > 0 && (
+            <div className="sm:col-span-2">
+              <label>Company</label>
               <Select onValueChange={selectChangeHandler}>
-                <SelectTrigger className="w-45">
-                  <SelectValue placeholder={"select a company"} />
+                <SelectTrigger className="w-full focus-visible:ring-offset-0 focus-visible:ring-0 my-1">
+                  <SelectValue placeholder="Select a Company" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    {companies.map((company) => {
-                      return (
+                    {companies &&
+                      companies.map((company) => (
                         <SelectItem
-                          value={company?.name?.toLowerCase()}
                           key={company._id}
+                          value={company.name.toLowerCase()}
                         >
                           {company.name}
                         </SelectItem>
-                      );
-                    })}
+                      ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
+            </div>
+          </div>
+          <div className="flex justify-end mt-6">
+            {loading ? (
+              <Button disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </Button>
+            ) : (
+              <Button type="submit">Post a Job</Button>
             )}
           </div>
-
-          {loading ? (
-            <Button type="button" disabled className="w-full my-4">
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Please wait
-            </Button>
-          ) : (
-            <Button type="submit" className="w-full my-4">
-              Post New Job
-            </Button>
-          )}
-          {companies.length == 0 && (
-            <p className="text-xs text-red-600 font-bold text-center my-3">
-              *Please register a company first, before posting a jobs
-            </p>
-          )}
         </form>
       </div>
     </div>

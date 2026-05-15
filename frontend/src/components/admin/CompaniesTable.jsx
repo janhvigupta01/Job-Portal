@@ -34,7 +34,7 @@ const CompaniesTable = () => {
     setFilterCompany(filteredCompany);
   }, [companies, searchCompanyByText]);
   return (
-    <div>
+    <div className="w-full overflow-x-auto">
       <Table>
         <TableCaption>A list of your recent registered companies</TableCaption>
         <TableHeader>
@@ -47,7 +47,7 @@ const CompaniesTable = () => {
         </TableHeader>
 
         <TableBody>
-          {companies && companies.length > 0 ? (
+          {filterCompany && filterCompany.length > 0 ? (
             filterCompany.map((company) => (
               <TableRow key={company._id}>
                 <TableCell>
@@ -67,7 +67,7 @@ const CompaniesTable = () => {
                         onClick={() =>
                           navigate(`/admin/companies/${company._id}`)
                         }
-                        className="flex items-center gap-2 w-fit cursor-pointer"
+                        className="flex items-center gap-2 w-fit cursor-pointer p-2 hover:bg-gray-100 rounded-md"
                       >
                         <Edit2 className="w-4" />
                         <span>Edit</span>
@@ -76,7 +76,7 @@ const CompaniesTable = () => {
                         onClick={() =>
                           navigate(`/admin/companies/${company._id}/applicants`)
                         }
-                        className="flex items-center gap-2 w-fit cursor-pointer"
+                        className="flex items-center gap-2 w-fit cursor-pointer p-2 hover:bg-gray-100 rounded-md"
                       >
                         <Users className="w-4" />
                         <span>Applicants</span>

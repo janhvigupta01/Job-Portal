@@ -12,8 +12,8 @@ import { useSelector } from "react-redux";
 import useGetCompanyById from "@/hooks/useGetCompanyById";
 
 const CompanySetup = () => {
-const params = useParams();
-useGetCompanyById(params.id);
+  const params = useParams();
+  useGetCompanyById(params.id);
   const [input, setInput] = useState({
     name: "",
     description: "",
@@ -23,7 +23,7 @@ useGetCompanyById(params.id);
   });
   const { singleCompany } = useSelector((state) => state.company);
   const [loading, setLoading] = useState(false);
-  
+
   const navigate = useNavigate();
 
   const changeEventHandler = (e) => {
@@ -81,9 +81,9 @@ useGetCompanyById(params.id);
   return (
     <div>
       <Navbar />
-      <div className="max-w-xl mx-auto my-10">
+      <div className="max-w-xl mx-auto my-10 p-4 sm:p-6 lg:p-8">
         <form onSubmit={submitHandler}>
-          <div className="flex items-center gap-5 p-8">
+          <div className="flex items-center gap-5 mb-8">
             <Button
               type="button"
               onClick={() => navigate("/admin/companies")}
@@ -95,7 +95,7 @@ useGetCompanyById(params.id);
             </Button>
             <h1 className="font-bold text-xl">Company Setup</h1>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <Label>Company Name</Label>
               <Input
@@ -115,15 +115,6 @@ useGetCompanyById(params.id);
               />
             </div>
             <div>
-              <Label>Website</Label>
-              <Input
-                type="text"
-                name="website"
-                value={input.website}
-                onChange={changeEventHandler}
-              />
-            </div>
-            <div>
               <Label>Location</Label>
               <Input
                 type="text"
@@ -133,24 +124,33 @@ useGetCompanyById(params.id);
               />
             </div>
             <div>
+              <Label>Website</Label>
+              <Input
+                type="text"
+                name="website"
+                value={input.website}
+                onChange={changeEventHandler}
+              />
+            </div>
+            <div>
               <Label>Logo</Label>
               <Input
-                type="file"
                 accept="image/*"
+                type="file"
                 onChange={changeFileHandler}
               />
             </div>
           </div>
-          {loading ? (
-            <Button type="button" disabled className="w-full mt-8">
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Please wait
-            </Button>
-          ) : (
-            <Button type="submit" className="w-full mt-8">
-              Update
-            </Button>
-          )}
+          <div className="flex justify-end mt-8">
+            {loading ? (
+              <Button disabled>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </Button>
+            ) : (
+              <Button type="submit">Update</Button>
+            )}
+          </div>
         </form>
       </div>
     </div>
